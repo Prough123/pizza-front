@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://git.heroku.com/pizza-nodejs.git',
+            target: 'https://pizza-nodejs.herokuapp.com',
             changeOrigin: true,
         })
     );
