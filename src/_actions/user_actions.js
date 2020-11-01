@@ -9,10 +9,12 @@ import {
     REMOVE_CART_ITEM_USER,
     ON_SUCCESS_BUY_USER
 } from './types';
-import { USER_SERVER } from '../components/Config.js';
+import {USER_SERVER} from '../components/Config.js';
+import {authAPI, cartAPI} from "../components/api/api";
 
 export function registerUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
+    // const request = axios.post(`${USER_SERVER}/register`, dataToSubmit)
+    const request = authAPI.register(dataToSubmit)
         .then(response => response.data);
 
     return {
@@ -22,7 +24,8 @@ export function registerUser(dataToSubmit) {
 }
 
 export function loginUser(dataToSubmit) {
-    const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
+    // const request = axios.post(`${USER_SERVER}/login`, dataToSubmit)
+    const request = authAPI.login(dataToSubmit)
         .then(response => response.data);
 
     return {
@@ -32,7 +35,8 @@ export function loginUser(dataToSubmit) {
 }
 
 export function auth() {
-    const request = axios.get(`${USER_SERVER}/auth`)
+    // const request = axios.get(`${USER_SERVER}/auth`)
+    const request = authAPI.auth()
         .then(response => response.data);
 
     return {
@@ -42,7 +46,8 @@ export function auth() {
 }
 
 export function logoutUser() {
-    const request = axios.get(`${USER_SERVER}/logout`)
+    // const request = axios.get(`${USER_SERVER}/logout`)
+    const request = authAPI.logoutUser()
         .then(response => response.data);
 
     return {
@@ -53,7 +58,8 @@ export function logoutUser() {
 
 
 export function addToCart(_id) {
-    const request = axios.get(`${USER_SERVER}/addToCart?productId=${_id}`)
+    // const request = axios.get(`${USER_SERVER}/addToCart?productId=${_id}`)
+    const request = cartAPI.addToCart(_id)
         .then(response => response.data);
 
     return {
@@ -63,15 +69,11 @@ export function addToCart(_id) {
 }
 
 
-
 export function getCartItems(cartItems, userCart) {
-    const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+    // const request = axios.get(`/api/product/products_by_id?id=${cartItems}&type=array`)
+
+    const request = cartAPI.getCartItems(cartItems)
         .then(response => {
-
-
-            //Make CartDetail inside Redux Store 
-            // We need to add quantity data to Product Information that come from Product Collection. 
-
             userCart.forEach(cartItem => {
                 response.data.forEach((productDetail, i) => {
                     if (cartItem.id === productDetail._id) {
@@ -90,12 +92,10 @@ export function getCartItems(cartItems, userCart) {
 }
 
 
-
-
 export function removeCartItem(id) {
-    const request = axios.get(`/api/users/removeFromCart?_id=${id}`)
+    // const request = axios.get(`/api/users/removeFromCart?_id=${id}`)
+    const request = cartAPI.removeCartItem(id)
         .then(response => {
-
             response.data.cart.forEach(item => {
                 response.data.cartDetail.forEach((k, i) => {
                     if (item.id === k._id) {
@@ -115,7 +115,8 @@ export function removeCartItem(id) {
 
 export function onSuccessBuy(data) {
 
-    const request = axios.post(`${USER_SERVER}/successBuy`, data)
+    // const request = axios.post(`${USER_SERVER}/successBuy`, data)
+    const request = cartAPI.onSuccessBuy(data)
         .then(response => response.data);
 
     return {
