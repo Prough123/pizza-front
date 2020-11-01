@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Axios from 'axios'
 import { Row, Col } from 'antd';
 import ProductImage from './Sections/ProductImage';
 import ProductInfo from './Sections/ProductInfo';
 import { addToCart } from '../../../_actions/user_actions';
 import { useDispatch } from 'react-redux';
+import {productsAPI} from "../../api/api";
 
 function DetailProductPage(props) {
     const dispatch = useDispatch();
@@ -12,11 +12,9 @@ function DetailProductPage(props) {
     const [Product, setProduct] = useState([])
 
     useEffect(() => {
-        Axios.get(`/api/product/products_by_id?id=${productId}&type=single`)
-            .then(response => {
+        productsAPI.getProducts(productId).then(response => {
                 setProduct(response.data[0])
             })
-
     }, [])
 
     const addToCartHandler = (productId) => {
