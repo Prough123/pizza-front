@@ -8,6 +8,8 @@ import { continents, price } from './Sections/Datas';
 import SearchFeature from './Sections/SearchFeature';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Carousel from '../Carousel/Carousel'
+import {productsAPI} from "../../api/api";
+import {NavLink} from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -38,7 +40,7 @@ function LandingPage() {
     const getProducts = (variables) => {
 
         // Axios.post('/api/product/getProducts', variables)
-        getProducts(variables)
+        productsAPI.getProducts(variables)
             .then(response => {
 
                 if (response.data.success) {
@@ -72,10 +74,10 @@ function LandingPage() {
 
     const renderCards = Products.map((product, index) => {
 
-        return <Col lg={6} md={8} xs={24}>
+        return <Col key={index} lg={6} md={8} xs={24}>
             <Card
                 hoverable={true}
-                cover={<a href={`/product/${product._id}`} > <ImageSlider images={product.images} /></a>}
+                cover={<NavLink to={`/product/${product._id}`} > <ImageSlider images={product.images} /></NavLink>}
             >
                 <Meta
                     title={product.title}

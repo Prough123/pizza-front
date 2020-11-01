@@ -12,7 +12,7 @@ function DetailProductPage(props) {
     const [Product, setProduct] = useState([])
 
     useEffect(() => {
-        productsAPI.getProducts(productId).then(response => {
+        productsAPI.getProduct(productId).then(response => {
                 setProduct(response.data[0])
             })
     }, [])

@@ -3,9 +3,9 @@ import React from 'react';
 import { Menu, Icon, Badge, Divider, Typography } from 'antd';
 import axios from 'axios';
 import { USER_SERVER } from '../../../Config';
-import { withRouter } from 'react-router-dom';
+import {NavLink, withRouter} from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { Avatar } from 'antd';
+
 
 
 function RightMenu(props) {
@@ -25,10 +25,10 @@ function RightMenu(props) {
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="mail">
-          <a href="/login">Вход</a>
+          <NavLink to="/login">Вход</NavLink>
         </Menu.Item>
         <Menu.Item key="app">
-          <a href="/register">Зарегистрироваться</a>
+          <NavLink to="/register">Зарегистрироваться</NavLink>
         </Menu.Item>
       </Menu>
     )
@@ -39,7 +39,7 @@ function RightMenu(props) {
         <Menu mode={props.mode}>
 
           <Menu.Item key="history">
-            <a href="/history">История покупок</a>
+            <NavLink to="/history">История покупок</NavLink>
           </Menu.Item>
           {/* 
           <Menu.Item key="upload">
@@ -48,9 +48,9 @@ function RightMenu(props) {
 
           <Menu.Item key="cart" style={{ paddingBottom: 3 }}>
             <Badge count={user.userData && user.userData.cart.length}>
-              <a href="/user/cart" style={{ marginRight: -22, color: '#667777' }}>
+              <NavLink to="/user/cart" style={{ marginRight: -22, color: '#667777' }}>
                 <Icon type="shopping-cart" style={{ fontSize: 30, marginBottom: 1 }} />
-              </a>
+              </NavLink>
             </Badge>
           </Menu.Item>
 
@@ -58,7 +58,7 @@ function RightMenu(props) {
           {/* {user && user.userData ? <Menu.Item className="user" disabled='true' style={{ paddingBottom: 9 }}>{user.userData.}</Menu.Item> : 0} */}
 
           <Menu.Item key="logout">
-            <a onClick={logoutHandler}>Выйти</a>
+            <div onClick={logoutHandler}>Выйти</div>
           </Menu.Item>
         </Menu>
 

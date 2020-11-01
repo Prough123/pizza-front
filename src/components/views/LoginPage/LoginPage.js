@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import {NavLink, withRouter} from "react-router-dom";
 import { loginUser } from "../../../_actions/user_actions";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -134,7 +134,7 @@ function LoginPage(props) {
                     Вход
                 </Button>
                 </div>
-                или <a href="/register">Зарегистрироваться сейчас</a>
+                или <NavLink to="/register">Зарегистрироваться сейчас</NavLink>
               </Form.Item>
             </form>
           </div>

@@ -5,7 +5,7 @@ const settings = {
 }
 
 export const instance = axios.create({
-    baseURL: 'https://pizza-nodejs.herokuapp.com',
+    baseURL: 'https://pizza-nodejs.herokuapp.com/api',
     ...settings
 })
 
